@@ -130,6 +130,9 @@ export default class {
     this.onNavigate(ROUTES_PATH['Dashboard'])
   }
 
+  /*  ============================= [Bug Hunt] - Dashboard ======================================= */
+
+  
   handleShowTickets(e, bills, index) {
     if (this.counter === undefined || this.index !== index) this.counter = 0
     if (this.index === undefined || this.index !== index) this.index = index
@@ -146,12 +149,14 @@ export default class {
     }
 
     bills.forEach(bill => {
-      $(`#open-bill${bill.id}`).click((e) => this.handleEditTicket(e, bill, bills))
+      $(`#open-bill${bill.id}`).off('click').click((e) => this.handleEditTicket(e, bill, bills))
     })
 
     return bills
 
   }
+
+  /*  ============================= [Bug Hunt] - Dashboard END ======================================= */
 
   getBillsAllUsers = () => {
     if (this.store) {
