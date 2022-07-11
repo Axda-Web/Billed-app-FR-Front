@@ -61,3 +61,13 @@ textarea:focus, input:focus, select:focus {
 *[placeholder] {
   color: #0E5AE5 !important;
 }
+
+/* ============================= [Bug Hunt] - Bills ======================================= */
+
+.error-message {
+  color: red;
+  margin-top: .5em;
+  display: none;
+}
+
+/* ============================= [Bug Hunt] - Bills END ======================================= */

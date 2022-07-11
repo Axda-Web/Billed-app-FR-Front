@@ -20,12 +20,19 @@ export default class NewBill {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
-    const formData = new FormData()
-    const email = JSON.parse(localStorage.getItem("user")).email
-    formData.append('file', file)
-    formData.append('email', email)
 
-    this.store
+    /* ============================= [Bug Hunt] - Bills ======================================= */
+
+    const fileInput = this.document.querySelector(`input[data-testid="file"]`)
+    const errorMessage = this.document.querySelector('.error-message')
+    const supportedFormats = ['jpeg','jpg','png']
+    const fileExtension = fileName.split('.').pop().toLowerCase()
+    if (supportedFormats.find( format => format === fileExtension ) === undefined ) {
+      fileInput.value = ''
+      errorMessage.style.display = 'block'
+    } else {
+      errorMessage.style.display = ''
+      this.store
       .bills()
       .create({
         data: formData,
@@ -34,11 +41,18 @@ export default class NewBill {
         }
       })
       .then(({fileUrl, key}) => {
-        console.log(fileUrl)
         this.billId = key
         this.fileUrl = fileUrl
         this.fileName = fileName
       }).catch(error => console.error(error))
+    }
+
+    /* ============================= [Bug Hunt] - Bills END ======================================= */
+
+    const formData = new FormData()
+    const email = JSON.parse(localStorage.getItem("user")).email
+    formData.append('file', file)
+    formData.append('email', email)
   }
   handleSubmit = e => {
     e.preventDefault()
