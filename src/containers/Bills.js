@@ -33,7 +33,7 @@ export default class {
       .bills()
       .list()
       .then(snapshot => {
-        const bills = snapshot
+        const bills = snapshot //.sort()
           .map(doc => {
             try {
               return {
