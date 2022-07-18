@@ -41,6 +41,19 @@ jest.mock("../app/store", () => mockStore)
        const mailIcon = screen.getByTestId("icon-mail")
        expect(mailIcon.className).toBe("active-icon")
      })
+
+     test("Then it should show all the inputs of the form and the button 'Envoyer'", () => {
+      window.onNavigate(ROUTES_PATH.NewBill)
+
+      expect(screen.getByText("Type de dépense")).toBeTruthy()
+      expect(screen.getByText("Nom de la dépense")).toBeTruthy()
+      expect(screen.getByText("Date")).toBeTruthy()
+      expect(screen.getByText("Montant TTC")).toBeTruthy()
+      expect(screen.getByText("TVA")).toBeTruthy()
+      expect(screen.getByText("Commentaire")).toBeTruthy()
+      expect(screen.getByText("Justificatif")).toBeTruthy()
+      expect(screen.getByText("Envoyer")).toBeTruthy()
+    })
    })
  
    describe("when I submit the form with empty fields", () => {
